@@ -231,7 +231,7 @@ module Wice
                  assocs: [])  #:nodoc:
 
 
-      @options[:include] = Wice.build_includes(@options[:include], assocs)
+      # @options[:include] = Wice.build_includes(@options[:include], assocs)
 
       if model # this is an included table
         column = @table_column_matrix.get_column_by_model_class_and_column_name(model, column_name)
