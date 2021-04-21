@@ -78,15 +78,7 @@ module Wice
       @controller = controller
 
       @relation = klass_or_relation
-      @klass = if @relation.is_a?(Class) && @relation.ancestors.index(ActiveRecord::Base)
-        klass_or_relation
-      else
-        klass_or_relation.klass
-      end
-
-      unless @klass.is_a?(Class) && @klass.ancestors.index(ActiveRecord::Base)
-        raise WiceGridArgumentError.new('ActiveRecord model class (second argument) must be a Class derived from ActiveRecord::Base')
-      end
+      @klass = klass_or_relation
 
       # validate :with_resultset & :with_paginated_resultset
       [:with_resultset, :with_paginated_resultset].each do |callback_symbol|
