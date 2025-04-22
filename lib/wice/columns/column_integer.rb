@@ -36,8 +36,18 @@ module Wice
         separator = I18n.t!('number.format.separator') rescue nil
         val = val.sub(separator, '.') if val.respond_to?(:sub) && separator
 
-        # Parse as float
-        Float(val) rescue nil
+         # Replace with this to preserve integers as integers
+         begin
+          # First try as integer
+          if val.to_s.include?('.')
+            Integer(val.to_f)  # Handle floats by converting to integer
+          else
+            Integer(val)
+          end
+        rescue
+          # Fall back to float if not an integer
+          Float(val) rescue nil
+        end
       end
 
       def get_op_and_value(val) #:nodoc:
